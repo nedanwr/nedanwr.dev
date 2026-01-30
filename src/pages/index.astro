@@ -1,10 +1,130 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Your extended projects list
+const projects = [
+  {
+    title: "Kronos",
+    description:
+      "A complete programming language with bytecode VM, garbage collector, and LSP. Human-readable syntax inspired by Python and Ruby.",
+    year: "2025",
+    tags: ["C", "VM", "GC", "LSP"],
+    website: "https://kronos.nedanwr.dev",
+    github: "https://github.com/nedanwr/kronos",
+  },
+  {
+    title: "ForgeKit",
+    description:
+      "A blazing-fast CLI toolkit for file conversions. Built in Rust for performance, safety, and zero-cost abstractions.",
+    year: "2025",
+    tags: ["Rust", "CLI"],
+    website: "https://forgekit.nedanwr.dev",
+    github: "https://github.com/nedanwr/forgekit",
+  },
+  {
+    title: "Finesse",
+    description:
+      "A loan, mortgage, and investment calculator in one place. No ads, no sign-up, no clutter—just the numbers and charts you need, with CSV/Excel export and print.",
+    year: "2026",
+    tags: ["TypeScript", "Finance", "Calculator"],
+    website: "https://finesse.nedanwr.dev",
+    github: "https://github.com/nedanwr/finesse",
+  },
+];
 ---
 
-<Layout>
-	<h1>Hello World</h1>
+<Layout title="Projects — Naveed Ali Anwar" description="A complete list of my projects and experiments">
+  <main id="main-content" class="main">
+    <header class="page-header">
+      <a href="https://naveedalianwar.com" class="back-link animate-fade-in">
+        <span class="arrow">←</span>
+        <span>Back to portfolio</span>
+      </a>
+      <h1 class="page-title animate-fade-up delay-1 font-display">Projects</h1>
+      <p class="page-description animate-fade-up delay-2">
+        Things I've built, what I'm working on, and what's coming next.
+      </p>
+    </header>
+
+    <section class="projects-section">
+      <div class="projects-grid">
+        {projects.map((project, index) => (
+          <ProjectCard {...project} index={index} />
+        ))}
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .main {
+    min-height: 100dvh;
+    padding: 3rem 2rem 10rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: 4rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color var(--duration-fast) var(--ease-out-expo),
+                gap var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+    gap: 0.75rem;
+  }
+
+  .back-link .arrow {
+    transition: transform var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .back-link:hover .arrow {
+    transform: translateX(-2px);
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    color: var(--color-fg);
+  }
+
+  .page-description {
+    font-size: 1rem;
+    color: var(--color-fg-muted);
+    margin: 0;
+    max-width: 480px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .main {
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .page-header {
+      margin-bottom: 3rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

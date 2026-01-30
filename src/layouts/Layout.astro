@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = "Ned Anwar — Projects",
-  description = "A curated collection of projects and experiments",
+  title = "Naveed Ali Anwar — Projects",
+  description = "A curated collection of my projects and experiments",
 } = Astro.props;
 ---
 
@@ -24,6 +24,10 @@ const {
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />
+    <script>
+      import { inject } from "@vercel/analytics";
+      inject();
+    </script>
   </body>
 </html>
 
